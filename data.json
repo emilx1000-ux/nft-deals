@@ -133,104 +133,35 @@
         "currency": "usd",
         "status": "pending"
       }
-    ]
-  ],
-  "completedDeals": [
-    [
-      "RNFJI4JT3",
-      {
-        "id": "RNFJI4JT3",
-        "sellerId": 8563923108,
-        "sellerUsername": "Kasikorop",
-        "nftLink": "https://t.me/nft/CupidCharm-27926",
-        "amount": 50,
-        "currency": "ton",
-        "status": "completed",
-        "createdAt": "2026-02-21T13:06:31.973Z",
-        "buyerId": 8563923108,
-        "buyerUsername": "Kasikorop"
-      }
     ],
     [
-      "RNFI4LNPV",
+      "PD0Z0P",
       {
-        "id": "RNFI4LNPV",
-        "sellerId": 8229657546,
-        "sellerUsername": "beeiosbai",
-        "nftLink": "https://t.me/nft/DeskCalendar-229713",
-        "amount": 3040,
-        "currency": "usdt",
-        "status": "completed",
-        "createdAt": "2026-02-21T13:28:17.261Z",
-        "buyerId": 8386475880,
-        "buyerUsername": "crimsonadminn"
-      }
-    ],
-    [
-      "RNF57POSW",
-      {
-        "id": "RNF57POSW",
-        "sellerId": 8563923108,
-        "sellerUsername": "Kasikorop",
-        "nftLink": "https://t.me/nft/CupidCharm-29654",
-        "amount": 60,
-        "currency": "usdt",
-        "status": "rejected",
-        "createdAt": "2026-02-21T13:31:01.284Z",
-        "buyerId": 8563923108,
-        "buyerUsername": "Kasikorop"
-      }
-    ],
-    [
-      "RNF84NA39",
-      {
-        "id": "RNF84NA39",
-        "sellerId": 8229657546,
-        "sellerUsername": "beeiosbai",
-        "amount": 300,
-        "currency": "rub",
-        "status": "completed",
-        "buyerId": 8386475880,
-        "buyerUsername": "crimsonadminn"
-      }
-    ],
-    [
-      "RNF94G06E",
-      {
-        "id": "RNF94G06E",
-        "sellerId": 8563923108,
-        "sellerUsername": "Kasikorop",
-        "amount": 100000000,
-        "currency": "eur",
-        "status": "completed",
-        "buyerId": 8386475880,
-        "buyerUsername": "crimsonadminn"
+        "id": "PD0Z0P",
+        "seller": 8386475880,
+        "currency": "USD",
+        "amount": "6",
+        "description": "Снуп дог",
+        "nft": "https://t.me/nft/HypnoLollipop-79660",
+        "status": "paid",
+        "buyer": 7696899091
       }
     ]
   ],
-  "userBalances": [
-    [
-      8563923108,
-      100000050
-    ],
-    [
-      8229657546,
-      3340
-    ]
-  ],
-  "userWallets": [],
-  "userCards": [
-    [
-      8229657546,
-      "1233 2921 2010 2010"
-    ],
-    [
-      8563923108,
-      "463465436326"
-    ],
+  "users": [
     [
       8386475880,
-      "1234 0119 2020 1010"
+      {
+        "ton": null,
+        "card": "1233 3567 4578 4578"
+      }
+    ],
+    [
+      7696899091,
+      {
+        "ton": null,
+        "card": null
+      }
     ]
   ]
 }
