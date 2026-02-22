@@ -5,6 +5,7 @@ const path = require('path');
 const http = require('http');
 
 const PORT = process.env.PORT || 10000;
+http.createServer((req, res) => res.end('Bot is running')).listen(PORT);
 const BOT_TOKEN = process.env.BOT_TOKEN;
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
