@@ -1,0 +1,236 @@
+{
+  "deals": [
+    [
+      "RNFQG3474",
+      {
+        "id": "RNFQG3474",
+        "sellerId": 8563923108,
+        "sellerUsername": "Kasikorop",
+        "nftLink": "https://t.me/nft/CupidCharm-8647",
+        "amount": 10000,
+        "currency": "stars",
+        "status": "paid",
+        "createdAt": "2026-02-21T11:48:51.745Z",
+        "buyerId": 8563923108,
+        "buyerUsername": "Kasikorop"
+      }
+    ],
+    [
+      "RNF8ZLGCD",
+      {
+        "id": "RNF8ZLGCD",
+        "sellerId": 8386475880,
+        "sellerUsername": "crimsonadminn",
+        "nftLink": "https://t.me/nft/123456",
+        "amount": 204,
+        "currency": "ton",
+        "status": "pending",
+        "createdAt": "2026-02-21T11:59:07.762Z"
+      }
+    ],
+    [
+      "RNFVS8GU5",
+      {
+        "id": "RNFVS8GU5",
+        "sellerId": 8563923108,
+        "sellerUsername": "Kasikorop",
+        "nftLink": "https://t.me/nft/CupidCharm-25983",
+        "amount": 60,
+        "currency": "ton",
+        "status": "pending",
+        "createdAt": "2026-02-21T12:07:10.857Z"
+      }
+    ],
+    [
+      "RNFSXA2RB",
+      {
+        "id": "RNFSXA2RB",
+        "sellerId": 8563923108,
+        "sellerUsername": "Kasikorop",
+        "nftLink": "https://t.me/nft/CupidCharm-25983",
+        "amount": 3,
+        "currency": "ton",
+        "status": "pending",
+        "createdAt": "2026-02-21T12:12:05.269Z"
+      }
+    ],
+    [
+      "RNF2XCOGU",
+      {
+        "id": "RNF2XCOGU",
+        "sellerId": 8563923108,
+        "sellerUsername": "Kasikorop",
+        "nftLink": "https://t.me/nft/CupidCharm-25983",
+        "amount": 4,
+        "currency": "ton",
+        "status": "pending",
+        "createdAt": "2026-02-21T12:18:05.062Z"
+      }
+    ],
+    [
+      "RNF30SP8E",
+      {
+        "id": "RNF30SP8E",
+        "sellerId": 8229657546,
+        "sellerUsername": "beeiosbai",
+        "amount": 200,
+        "currency": "card",
+        "status": "pending"
+      }
+    ],
+    [
+      "RNFBAWJXI",
+      {
+        "id": "RNFBAWJXI",
+        "sellerId": 8229657546,
+        "sellerUsername": "beeiosbai",
+        "amount": 234,
+        "currency": "card",
+        "status": "pending"
+      }
+    ],
+    [
+      "RNFGTAGT1",
+      {
+        "id": "RNFGTAGT1",
+        "sellerId": 8229657546,
+        "sellerUsername": "beeiosbai",
+        "amount": 243,
+        "currency": "card",
+        "status": "paid",
+        "buyerId": 8386475880
+      }
+    ],
+    [
+      "RNF7OWAY4",
+      {
+        "id": "RNF7OWAY4",
+        "sellerId": 8229657546,
+        "sellerUsername": "beeiosbai",
+        "amount": 400,
+        "currency": "card",
+        "status": "pending"
+      }
+    ],
+    [
+      "RNFYWRDT5",
+      {
+        "id": "RNFYWRDT5",
+        "sellerId": 8386475880,
+        "sellerUsername": "crimsonadminn",
+        "amount": 1234,
+        "currency": "rub",
+        "status": "pending"
+      }
+    ],
+    [
+      "RNFBJ2NGN",
+      {
+        "id": "RNFBJ2NGN",
+        "sellerId": 8229657546,
+        "sellerUsername": "beeiosbai",
+        "amount": 3,
+        "currency": "usd",
+        "status": "pending"
+      }
+    ]
+  ],
+  "completedDeals": [
+    [
+      "RNFJI4JT3",
+      {
+        "id": "RNFJI4JT3",
+        "sellerId": 8563923108,
+        "sellerUsername": "Kasikorop",
+        "nftLink": "https://t.me/nft/CupidCharm-27926",
+        "amount": 50,
+        "currency": "ton",
+        "status": "completed",
+        "createdAt": "2026-02-21T13:06:31.973Z",
+        "buyerId": 8563923108,
+        "buyerUsername": "Kasikorop"
+      }
+    ],
+    [
+      "RNFI4LNPV",
+      {
+        "id": "RNFI4LNPV",
+        "sellerId": 8229657546,
+        "sellerUsername": "beeiosbai",
+        "nftLink": "https://t.me/nft/DeskCalendar-229713",
+        "amount": 3040,
+        "currency": "usdt",
+        "status": "completed",
+        "createdAt": "2026-02-21T13:28:17.261Z",
+        "buyerId": 8386475880,
+        "buyerUsername": "crimsonadminn"
+      }
+    ],
+    [
+      "RNF57POSW",
+      {
+        "id": "RNF57POSW",
+        "sellerId": 8563923108,
+        "sellerUsername": "Kasikorop",
+        "nftLink": "https://t.me/nft/CupidCharm-29654",
+        "amount": 60,
+        "currency": "usdt",
+        "status": "rejected",
+        "createdAt": "2026-02-21T13:31:01.284Z",
+        "buyerId": 8563923108,
+        "buyerUsername": "Kasikorop"
+      }
+    ],
+    [
+      "RNF84NA39",
+      {
+        "id": "RNF84NA39",
+        "sellerId": 8229657546,
+        "sellerUsername": "beeiosbai",
+        "amount": 300,
+        "currency": "rub",
+        "status": "completed",
+        "buyerId": 8386475880,
+        "buyerUsername": "crimsonadminn"
+      }
+    ],
+    [
+      "RNF94G06E",
+      {
+        "id": "RNF94G06E",
+        "sellerId": 8563923108,
+        "sellerUsername": "Kasikorop",
+        "amount": 100000000,
+        "currency": "eur",
+        "status": "completed",
+        "buyerId": 8386475880,
+        "buyerUsername": "crimsonadminn"
+      }
+    ]
+  ],
+  "userBalances": [
+    [
+      8563923108,
+      100000050
+    ],
+    [
+      8229657546,
+      3340
+    ]
+  ],
+  "userWallets": [],
+  "userCards": [
+    [
+      8229657546,
+      "1233 2921 2010 2010"
+    ],
+    [
+      8563923108,
+      "463465436326"
+    ],
+    [
+      8386475880,
+      "1234 0119 2020 1010"
+    ]
+  ]
+}
