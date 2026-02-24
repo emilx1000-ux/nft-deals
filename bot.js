@@ -62,6 +62,7 @@ function currencyKeyboard() {
       keyboard: [
         ['TON', 'USD'],
         ['RUB', 'EUR'],
+        [UAH],
         ['STARS']
       ],
       resize_keyboard: true,
