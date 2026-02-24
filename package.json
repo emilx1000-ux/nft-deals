@@ -1,10 +1,12 @@
 {
-  "name": "nft-escrow-bot",
-  "version": "2.0.0",
-  "main": "bot.js",
+  "name": "telegram-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
-    "dotenv": "^16.4.0",
-    "mongoose": "^8.0.0",
-    "node-telegram-bot-api": "^0.64.0"
+    "node-telegram-bot-api": "^0.64.0",
+    "dotenv": "^16.4.0"
   }
 }
